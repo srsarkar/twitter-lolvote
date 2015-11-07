@@ -1,8 +1,14 @@
 var Twit = require('twit');
 var natural = require('natural');
-var twitInfo = require('config.js');
-var twitter = new Twit(twitInfo);
+//var twitInfo = require('config.js');
+//var twitter = new Twit(twitInfo);
 var fs = require('fs');
+var twitter = new Twit ({
+	consumer_key: process.env.CONSUMER_KEY,
+	consumer_secret: process.env.CONSUMER_SECRET,
+	access_token: process.env.ACCESS_TOKEN,
+	access_token_secret: process.env.ACCESS_TOKEN_SECRET
+});
 
 tokenizer = new natural.WordTokenizer();
 
