@@ -1,6 +1,6 @@
 var Twit = require('twit');
 var natural = require('natural');
-var twitInfo = require('./config.js');
+var twitInfo = require('config.js');
 var twitter = new Twit(twitInfo);
 var fs = require('fs');
 
@@ -90,6 +90,8 @@ function matchRE (tweetText) {
 	}
 	return false;
 }
+
+
 
 /**function postMedia () {
 	var gifArray = ['gifs/leslieknope.gif', 'gifs/karatekid.gif', 'gifs/kidpresident.gif'];
