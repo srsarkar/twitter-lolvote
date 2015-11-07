@@ -157,6 +157,16 @@ stream.on('tweet', function (tweet) {
 	})
 })
 
+//runs the program once an hour
+setInterval (function() {
+	try {
+		run();
+	}
+	catch (e) {
+		console.log(e);
+	}
+}, 60000 * 60);
+
   /**if (matchRE(text)) {
   	post(greeting() + "@" + asker + ". " + response() + ". #Vote2016");
   	console.log ("positive success!");
