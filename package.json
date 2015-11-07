@@ -20,8 +20,8 @@
   "devDependencies": {},
   "optionalDependencies": {},
   "engines": {
-    "node": "0.8.x",
-    "npm": "1.1.x"
+    "node": "5.0.0",
+    "npm": "3.3.6"
   },
   "author": {
     "name": "Bryan Braun",
