@@ -76,7 +76,7 @@ function greeting () {
 function matchRE (tweetText) {
 	//var tweetArray = tokenizer.tokenize(tweetText); 
 	//var phraseArr = [/Ivoted, I'm registered/i, I'm going to vote];
-	var phraseArray = ["I voted", "I'm registered"];
+	var phraseArray = [I/svoted\i, "I'm registered"];
 	var text = tweetText;
 
 	/**for (var i=0; i < tweetArray.length; i++) {
