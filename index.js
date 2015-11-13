@@ -4,10 +4,10 @@ var natural = require('natural');
 //var twitter = new Twit(twitInfo);
 var fs = require('fs');
 var twitter = new Twit ({
-		consumer_key: process.env.CONSUMER_KEY,
-		consumer_secret: process.env.CONSUMER_SECRET,
-		access_token: process.env.ACCESS_TOKEN,
-		access_token_secret: process.env.ACCESS_TOKEN_SECRET
+		consumer_key: 'cjyo4tD7o22xhS29PI3RcW5EO',
+		consumer_secret: 'MIMmDCsjyWJogp8cIOEBel0KgjJL6KPimf9VPZy648bvssCzZ4',
+		access_token: '3875093548-LC2okRvptebpkYrOikRqzUspM7E7Xu0dc9ppURv',
+		access_token_secret: '7SDKsOKwAPE8xxVRgzJfI2TVeSlim3oSSTpIJI1Dvw24i'
 });
 
 tokenizer = new natural.WordTokenizer();
@@ -35,7 +35,7 @@ function resp () {
 			resp = "Woohoo, you're the best!";
 			break;
 		case 1:
-			resp = "YAS QUEEN! Don't forget - NYC Election 11/3!";
+			resp = "YAS QUEEN!";
 			break;
 		case 2:
 			resp = "YAS QUEEN! Don't forget - NYC Primary Election 4/19/16!";
@@ -76,7 +76,7 @@ function greeting () {
 function matchRE (tweetText) {
 	//var tweetArray = tokenizer.tokenize(tweetText); 
 	//var phraseArr = [/Ivoted, I'm registered/i, I'm going to vote];
-	var phraseArray = [I/svoted\i, "I'm registered"];
+	var phraseArray = ["I voted", "I will vote", "I did vote", "I'm registered"];
 	var text = tweetText;
 
 	/**for (var i=0; i < tweetArray.length; i++) {
@@ -166,6 +166,13 @@ setInterval (function() {
 		console.log(e);
 	}
 }, 60000 * 60);
+
+//pinging itself so that it doesn't fall asleep
+setInterval(function() {
+    http.get("http://lolvote-app.herokuapp.com");
+    console.log('index',index);
+	index++;
+}, 300000); // every 5 minutes (300000)
 
   /**if (matchRE(text)) {
   	post(greeting() + "@" + asker + ". " + response() + ". #Vote2016");
