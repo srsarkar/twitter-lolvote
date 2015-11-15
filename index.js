@@ -81,6 +81,14 @@ function matchRE (tweetText) {
 	var phraseArray = ["I voted", "I will vote", "I did vote", "I'm registered"];
 	var text = tweetText;
 
+	for (var i = 0; i < phraseArray.length; i++) {
+		var re = new RegExp (phraseArray[i]);
+		if (re.test(text)) {
+			return true;
+		}
+	}
+	return false;
+
 	/**for (var i=0; i < tweetArray.length; i++) {
 		for (var j=0; j < phraseArray.length; j++){
 			var re = new RegExp (phraseArray[j]);
@@ -89,14 +97,6 @@ function matchRE (tweetText) {
 			}
 		}	
 	}*/
-
-	for (var i = 0; i < phraseArray.length; i++) {
-		var re = new RegExp (phraseArray[i]);
-		if (re.test(text)) {
-			return true;
-		}
-	}
-	return false;
 }
 
 
@@ -139,18 +139,16 @@ run = function() {
 		twitter.post('media/upload', {media_data: content}, function (err, data, response) {
 			var mediaIdStr = data.media_id_string;
 			var tweetRes = "";
-			var tryThis = resp();
+			var response = resp();
 
 		/**twitter.post ('statuses/update', params, function (err, data, response) {
 			console.log(data)
 		})*/
 			if (matchRE(text)) {
-		  		tweetRes = greeting() + " @" + asker + " " + tryThis + ". #Vote2016";
-		  		console.log ("positive success!");
+		  		tweetRes = greeting() + " @" + asker + " " + response + ". #Vote2016";
 	  		} 
 	  		else {
 		 	 	tweetRes = "Really hope you're planning on voting, @" + asker + ". Here's a link to help: bit.ly/voooote #Vote2016";
-		  		console.log ("negative success");
 	  		}
 
 	  		var params = { status: tweetRes, media_ids: [mediaIdStr] }
@@ -161,6 +159,7 @@ run = function() {
 	});
 }
 
+//run program once an hour
 setInterval (function() {
 	try {
 		run();
