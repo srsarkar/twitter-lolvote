@@ -119,7 +119,7 @@ function matchRE (tweetText) {
 }*/
 
 
-
+run = function() {
 	var stream = twitter.stream('statuses/filter', { track: '@lolvote_bot' })
 
 	stream.on('tweet', function (tweet) {
@@ -158,8 +158,17 @@ function matchRE (tweetText) {
 	  		twitter.post ('statuses/update', params, function (err, data, response) {
 	  		})
 		})
-	})
+	});
+}
 
+setInterval (function() {
+	try {
+		run();
+	}
+	catch (e) {
+		console.log(e);
+	}
+}, 60000 * 60);
 
 
 //pinging itself so that it doesn't fall asleep
