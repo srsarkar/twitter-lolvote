@@ -172,8 +172,6 @@ setInterval (function() {
 //pinging itself so that it doesn't fall asleep
 setInterval(function() {
     http.get("http://lolvote-app.herokuapp.com");
-    console.log('index',index);
-	index++;
 }, 300000); // every 5 minutes (300000)
 
   /**if (matchRE(text)) {
