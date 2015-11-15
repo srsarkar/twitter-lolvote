@@ -119,55 +119,48 @@ function matchRE (tweetText) {
 }*/
 
 
-var stream = twitter.stream('statuses/filter', { track: '@lolvote_bot' })
 
-stream.on('tweet', function (tweet) {
-	var asker = tweet.user.screen_name;
-	var text = tweet.text;
+	var stream = twitter.stream('statuses/filter', { track: '@lolvote_bot' })
+
+	stream.on('tweet', function (tweet) {
+		var asker = tweet.user.screen_name;
+		var text = tweet.text;
 
   //RegExes
  // var greetingRE = /^hi$/;
   //var hillaryRE = /^hillary$/;
   //var bernieRE = /^bernietest$/
 
-	var gifArray = ['gifs/leslieknope.gif', 'gifs/karatekid.gif', 'gifs/kidpresident.gif', 'gifs/voteordie.gif', 'gifs/reginageorge.gif'];
-	var n = Math.floor(Math.random() * 5);
+		var gifArray = ['gifs/leslieknope.gif', 'gifs/karatekid.gif', 'gifs/kidpresident.gif', 'gifs/voteordie.gif', 'gifs/reginageorge.gif'];
+		var n = Math.floor(Math.random() * 5);
 
-	var content = fs.readFileSync(gifArray[n], {encoding: 'base64'})
+		var content = fs.readFileSync(gifArray[n], {encoding: 'base64'})
 
-	twitter.post('media/upload', {media_data: content}, function (err, data, response) {
-		var mediaIdStr = data.media_id_string;
-		var tweetRes = "";
-		var tryThis = resp();
+		twitter.post('media/upload', {media_data: content}, function (err, data, response) {
+			var mediaIdStr = data.media_id_string;
+			var tweetRes = "";
+			var tryThis = resp();
 
 		/**twitter.post ('statuses/update', params, function (err, data, response) {
 			console.log(data)
 		})*/
-		if (matchRE(text)) {
-		  	tweetRes = greeting() + " @" + asker + " " + tryThis + ". #Vote2016";
-		  	console.log ("positive success!");
-	  	} 
-	  	else {
-		  	tweetRes = "Really hope you're planning on voting, @" + asker + ". Here's a link to help: bit.ly/voooote #Vote2016";
-		  	console.log ("negative success");
-	  	}
+			if (matchRE(text)) {
+		  		tweetRes = greeting() + " @" + asker + " " + tryThis + ". #Vote2016";
+		  		console.log ("positive success!");
+	  		} 
+	  		else {
+		 	 	tweetRes = "Really hope you're planning on voting, @" + asker + ". Here's a link to help: bit.ly/voooote #Vote2016";
+		  		console.log ("negative success");
+	  		}
 
-	  	var params = { status: tweetRes, media_ids: [mediaIdStr] }
+	  		var params = { status: tweetRes, media_ids: [mediaIdStr] }
 
-	  	twitter.post ('statuses/update', params, function (err, data, response) {
-	  	})
+	  		twitter.post ('statuses/update', params, function (err, data, response) {
+	  		})
+		})
 	})
-})
 
-//runs the program once an hour
-setInterval (function() {
-	try {
-		stream.on();
-	}
-	catch (e) {
-		console.log(e);
-	}
-}, 60000 * 60);
+
 
 //pinging itself so that it doesn't fall asleep
 setInterval(function() {
