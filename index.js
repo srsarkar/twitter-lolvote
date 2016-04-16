@@ -1,16 +1,21 @@
-var _ = require('lodash');
-var Client = require('node-rest-client').Client;
+
 var Twit = require('twit');
+var config = require('./config.js');
+var twitter = new Twit(config);
+/**var twitter = new Twit({
+	consumer_key: 'cjyo4tD7o22xhS29PI3RcW5EO',
+	consumer_secret: 'MIMmDCsjyWJogp8cIOEBel0KgjJL6KPimf9VPZy648bvssCzZ4',
+	access_token: '3875093548-LC2okRvptebpkYrOikRqzUspM7E7Xu0dc9ppURv',
+	access_token_secret: '7SDKsOKwAPE8xxVRgzJfI2TVeSlim3oSSTpIJI1Dvw24i'
+});**/
+
 var natural = require('natural');
+var http = require('http');
 //var twitInfo = require('config.js');
 //var twitter = new Twit(twitInfo);
 var fs = require('fs');
-var twitter = new Twit ({
-		consumer_key: process.env.CONSUMER_KEY,
-		consumer_secret: process.env.CONSUMER_SECRET,
-		access_token: process.env.ACCESS_TOKEN,
-		access_token_secret: process.env.ACCESS_TOKEN_SECRET
-});
+
+
 
 tokenizer = new natural.WordTokenizer();
 
@@ -88,15 +93,6 @@ function matchRE (tweetText) {
 		}
 	}
 	return false;
-
-	/**for (var i=0; i < tweetArray.length; i++) {
-		for (var j=0; j < phraseArray.length; j++){
-			var re = new RegExp (phraseArray[j]);
-			if (re.test(tweetArray[i])) {
-				return true;
-			}
-		}	
-	}*/
 }
 
 
@@ -126,11 +122,6 @@ run = function() {
 		var asker = tweet.user.screen_name;
 		var text = tweet.text;
 
-  //RegExes
- // var greetingRE = /^hi$/;
-  //var hillaryRE = /^hillary$/;
-  //var bernieRE = /^bernietest$/
-
 		var gifArray = ['gifs/leslieknope.gif', 'gifs/karatekid.gif', 'gifs/kidpresident.gif', 'gifs/voteordie.gif', 'gifs/reginageorge.gif'];
 		var n = Math.floor(Math.random() * 5);
 
@@ -145,7 +136,7 @@ run = function() {
 			console.log(data)
 		})*/
 			if (matchRE(text)) {
-		  		tweetRes = greeting() + " @" + asker + " " + response + ". #Vote2016";
+		  		tweetRes = greeting() + " @" + asker + ". " + response + ". #Vote2016";
 	  		} 
 	  		else {
 		 	 	tweetRes = "Really hope you're planning on voting, @" + asker + ". Here's a link to help: bit.ly/voooote #Vote2016";
@@ -160,20 +151,34 @@ run = function() {
 }
 
 //run program once an hour
-setInterval (function() {
+/**setInterval (function() {
 	try {
 		run();
 	}
 	catch (e) {
 		console.log(e);
 	}
-}, 60000 * 60);
+}, 60000 * 60);**/
 
 
 //pinging itself so that it doesn't fall asleep
 setInterval(function() {
-    http.get("http://lolvote-app.herokuapp.com");
+    http.get("http://lolvote-bot.herokuapp.com");
 }, 300000); // every 5 minutes (300000)
+
+	/**for (var i=0; i < tweetArray.length; i++) {
+		for (var j=0; j < phraseArray.length; j++){
+			var re = new RegExp (phraseArray[j]);
+			if (re.test(tweetArray[i])) {
+				return true;
+			}
+		}	
+	}*/
+
+  //RegExes
+ // var greetingRE = /^hi$/;
+  //var hillaryRE = /^hillary$/;
+  //var bernieRE = /^bernietest$/
 
   /**if (matchRE(text)) {
   	post(greeting() + "@" + asker + ". " + response() + ". #Vote2016");

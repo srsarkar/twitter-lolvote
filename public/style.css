@@ -1,0 +1,12 @@
+body {
+	text-align: center;
+	font-family: Helvetica, Trebuchet MS;
+}
+
+a {
+	color: grey;
+}
+
+a:hover{
+	color: black;
+}
