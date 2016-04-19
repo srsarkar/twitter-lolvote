@@ -178,11 +178,6 @@ setInterval(function() {
 		}	
 	}*/
 
-  //RegExes
- // var greetingRE = /^hi$/;
-  //var hillaryRE = /^hillary$/;
-  //var bernieRE = /^bernietest$/
-
   /**if (matchRE(text)) {
   	post(greeting() + "@" + asker + ". " + response() + ". #Vote2016");
   	console.log ("positive success!");
