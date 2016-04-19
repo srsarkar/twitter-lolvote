@@ -20,11 +20,6 @@ var fs = require('fs');
 tokenizer = new natural.WordTokenizer();
 
 
-//search tweets
-
-runLolvote();
-setInterval (runLolvote, 30000) 
-
 function search (query) {
     twitter.get('search/tweets', { q: query, count: 1 }, function(err, data, response) {
       console.log(data.statuses[0].text);
@@ -107,7 +102,7 @@ function matchRE (tweetText) {
 }
 
 
-function runLolvote () {
+run = function () {
 	var stream = twitter.stream('statuses/filter', { track: '@lolvote_bot' })
 
 	stream.on('tweet', function (tweet) {
@@ -145,14 +140,14 @@ function runLolvote () {
 
 	  		twitter.post ('statuses/update', params, function (err, data, response) {
 	  		})
-		})
-	};
-}
+	})
+};
+
 
 
 
 //pinging itself so that it doesn't fall asleep
-//setInterval( function() {http.get("http://lolvote-bot.herokuapp.com");}, 300000; // every 5 minutes (300000)
+setInterval( function() {http.get("http://lolvote-bot.herokuapp.com");}, 300000); // every 5 minutes (300000)
 
 	/**for (var i=0; i < tweetArray.length; i++) {
 		for (var j=0; j < phraseArray.length; j++){
