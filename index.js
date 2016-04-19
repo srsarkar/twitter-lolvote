@@ -130,25 +130,30 @@ run = function() {
 		var asker = tweet.user.screen_name;
 		var text = tweet.text;
 
-		var gifArray = ['gifs/leslieknope.gif', 'gifs/karatekid.gif', 'gifs/kidpresident.gif', 'gifs/voteordie.gif', 'gifs/reginageorge.gif'];
-		var n = Math.floor(Math.random() * 5);
-
-		var content = fs.readFileSync(gifArray[n], {encoding: 'base64'})
-
-		twitter.post('media/upload', {media_data: content}, function (err, data, response) {
-			var mediaIdStr = data.media_id_string;
-			var tweetRes = "";
-			var response = resp();
+		var content = 'gifs/vote/breakingbad.gif';
 
 		/**twitter.post ('statuses/update', params, function (err, data, response) {
 			console.log(data)
 		})*/
 			if (matchRE(text)) {
 		  		tweetRes = greeting() + " @" + asker + ". " + response + " #Vote2016";
+		  		var gifArray = ['gifs/karatekid.gif', 'gifs/kidpresident.gif', 'gifs/mericaeagle.gif', 'gifs/waynesworld.gif', 'gifs/yaybey.gif', 'gifs/abby.gif', 'gifs/omgyas.gif', 'gifs/yas.gif', 'gifs/youretheshit.gif'];
+				var n = Math.floor(Math.random() * 8);
+
+				content = fs.readFileSync(gifArray[n], {encoding: 'base64'})
 	  		} 
 	  		else {
 		 	 	tweetRes = "Really hope you're planning on voting, @" + asker + ". Here's a link to help: bit.ly/voooote #Vote2016";
+		 	 	var gifArr = ['gifs/vote/breakingbad.gif', 'gifs/vote/leslieknope.gif', 'gifs/vote/voteordie.gif', 'gifs/vote/reginageorge.gif'];
+		 	 	var i = Math.floor(Math.random() * 3);
+
+				content = fs.readFileSync(gifArray[i], {encoding: 'base64'})
 	  		}
+
+	  		twitter.post('media/upload', {media_data: content}, function (err, data, response) {
+			var mediaIdStr = data.media_id_string;
+			var tweetRes = "";
+			var response = resp();
 
 	  		var params = { status: tweetRes, media_ids: [mediaIdStr] }
 
