@@ -22,6 +22,9 @@ tokenizer = new natural.WordTokenizer();
 
 //search tweets
 
+runLolvote();
+setInterval (runLolvote, 30000) 
+
 function search (query) {
     twitter.get('search/tweets', { q: query, count: 1 }, function(err, data, response) {
       console.log(data.statuses[0].text);
@@ -86,7 +89,7 @@ function matchRE (tweetText) {
 	var phraseArray = ["i voted", "i will vote", "i did vote", "i'm registered", "im registered", "#ivoted", "ivoted", ];
 	var text = tweetText;
 
-	for (vari i=0; i < phraseArray.length; i++) {
+	for (var i=0; i < phraseArray.length; i++) {
 		var str = text.toLowerCase();
 		if (str == phraseArray[i]){
 			return true;
@@ -104,26 +107,7 @@ function matchRE (tweetText) {
 }
 
 
-
-/**function postMedia () {
-	var gifArray = ['gifs/leslieknope.gif', 'gifs/karatekid.gif', 'gifs/kidpresident.gif'];
-	var gif = '/gifs/leslieknope.gif';
-	var n = Math.floor(Math.random() * 3);
-
-	var content = fs.readFileSync(gif, {encoding: 'base64'})
-
-	twitter.post('media/upload', {media_data: content}, function (err, data, response) {
-		var mediaIdStr = data.media_id_string;
-		var params = { status: 'I work!', media_ids: [mediaIdStr] }
-
-		twitter.post ('statuses/update', params, function (err, data, response) {
-			console.log(data)
-		})
-	})
-}*/
-
-
-run = function() {
+function runLolvote () {
 	var stream = twitter.stream('statuses/filter', { track: '@lolvote_bot' })
 
 	stream.on('tweet', function (tweet) {
@@ -150,24 +134,25 @@ run = function() {
 				content = fs.readFileSync(gifArray[i], {encoding: 'base64'})
 	  		}
 
-	  		twitter.post('media/upload', {media_data: content}, function (err, data, response) {
+	  		//twitter.post('media/upload', {media_data: content}, function (err, data, response) {
 			var mediaIdStr = data.media_id_string;
 			var tweetRes = "";
 			var response = resp();
 
 	  		var params = { status: tweetRes, media_ids: [mediaIdStr] }
 
+	  		console.log (tweetRes + content);
+
 	  		twitter.post ('statuses/update', params, function (err, data, response) {
 	  		})
 		})
-	});
+	};
 }
 
 
+
 //pinging itself so that it doesn't fall asleep
-setInterval(function() {
-    http.get("http://lolvote-bot.herokuapp.com");
-}, 300000); // every 5 minutes (300000)
+//setInterval( function() {http.get("http://lolvote-bot.herokuapp.com");}, 300000; // every 5 minutes (300000)
 
 	/**for (var i=0; i < tweetArray.length; i++) {
 		for (var j=0; j < phraseArray.length; j++){
