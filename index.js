@@ -136,14 +136,14 @@ run = function() {
 			console.log(data)
 		})*/
 			if (matchRE(text)) {
-		  		tweetRes = greeting() + " @" + asker + ". " + response + " #Vote2016";
+		  		tweetRes = greeting() + " @" + asker + ". " + response + " #NYPrimary";
 		  		var gifArray = ['gifs/karatekid.gif', 'gifs/kidpresident.gif', 'gifs/mericaeagle.gif', 'gifs/waynesworld.gif', 'gifs/yaybey.gif', 'gifs/abby.gif', 'gifs/omgyas.gif', 'gifs/yas.gif', 'gifs/youretheshit.gif'];
 				var n = Math.floor(Math.random() * 8);
 
 				content = fs.readFileSync(gifArray[n], {encoding: 'base64'})
 	  		} 
 	  		else {
-		 	 	tweetRes = "Really hope you're planning on voting, @" + asker + ". Here's a link to help: bit.ly/voooote #Vote2016";
+		 	 	tweetRes = "Really hope you're planning on voting, @" + asker + ". This might help: http://votersedge.nyccfb.info/ #NYPrimary";
 		 	 	var gifArr = ['gifs/vote/breakingbad.gif', 'gifs/vote/leslieknope.gif', 'gifs/vote/voteordie.gif', 'gifs/vote/reginageorge.gif'];
 		 	 	var i = Math.floor(Math.random() * 3);
 
