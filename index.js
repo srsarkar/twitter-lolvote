@@ -42,10 +42,10 @@ function resp () {
 			resp = "Woohoo, you're the best!";
 			break;
 		case 1:
-			resp = "YAS QUEEN!";
+			resp = "YAS KWEEN!";
 			break;
 		case 2:
-			resp = "YAS QUEEN! Don't forget - NYC Primary Election 4/19/16!";
+			resp = "Awwwww yeah!";
 			break;
 		case 3:
 			resp = "I could kiss you right now. Tell a friend to vote if you want to avoid my smooches <3";
@@ -54,7 +54,7 @@ function resp () {
 			resp = "There is nothing sexier than someone with a voting record";
 			break;
 		case 5:
-			resp = "You make my inner suffragette proud!";
+			resp = "You are the wind beneath my wings. Also the American peoples' wings. Because we are a country of winged peoples.";
 			break;
 	}
 
@@ -73,7 +73,7 @@ function greeting () {
 			greeting = "Hi";
 			break;
 		case 2:
-			greeting = "Salut";
+			greeting = "Comrade";
 			break;
 	}
 
@@ -83,16 +83,24 @@ function greeting () {
 function matchRE (tweetText) {
 	//var tweetArray = tokenizer.tokenize(tweetText); 
 	//var phraseArr = [/Ivoted, I'm registered/i, I'm going to vote];
-	var phraseArray = ["I voted", "I will vote", "I did vote", "I'm registered"];
+	var phraseArray = ["i voted", "i will vote", "i did vote", "i'm registered", "im registered", "#ivoted", "ivoted", ];
 	var text = tweetText;
 
-	for (var i = 0; i < phraseArray.length; i++) {
-		var re = new RegExp (phraseArray[i]);
-		if (re.test(text)) {
+	for (vari i=0; i < phraseArray.length; i++) {
+		var str = text.toLowerCase();
+		if (str == phraseArray[i]){
 			return true;
 		}
 	}
 	return false;
+
+	/**for (var i = 0; i < phraseArray.length; i++) {
+		var re = new RegExp (phraseArray[i]);
+		if (re.test(text)) {
+			return true;
+		}
+	}**/
+
 }
 
 
@@ -136,7 +144,7 @@ run = function() {
 			console.log(data)
 		})*/
 			if (matchRE(text)) {
-		  		tweetRes = greeting() + " @" + asker + ". " + response + ". #Vote2016";
+		  		tweetRes = greeting() + " @" + asker + ". " + response + " #Vote2016";
 	  		} 
 	  		else {
 		 	 	tweetRes = "Really hope you're planning on voting, @" + asker + ". Here's a link to help: bit.ly/voooote #Vote2016";
@@ -149,16 +157,6 @@ run = function() {
 		})
 	});
 }
-
-//run program once an hour
-/**setInterval (function() {
-	try {
-		run();
-	}
-	catch (e) {
-		console.log(e);
-	}
-}, 60000 * 60);**/
 
 
 //pinging itself so that it doesn't fall asleep
